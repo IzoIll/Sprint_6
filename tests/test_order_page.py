@@ -1,5 +1,5 @@
 import pytest
-from tests.data import RentalData, TextData, OrdersData, UrlsData
+from Data.data import RentalData, TextData, OrdersData, UrlsData
 from pages.base_page import BasePage
 from pages.order_page import OrderPages
 

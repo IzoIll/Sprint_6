@@ -1,12 +1,10 @@
 import allure
 from selenium.webdriver import Keys
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
 from locators.locators import MainPageLocators, OrderPageLocators
 from pages.base_page import BasePage
 
 class OrderPages(BasePage):
-
+    @allure.step('Кликнуть на кнопку "да все привыкли"')
     def click_cookie_button(self):
         self.click_to_element(MainPageLocators.Cookie_button)
 
@@ -25,7 +23,7 @@ class OrderPages(BasePage):
     @allure.step("Заполняем поле с метро")
     def set_station(self, station):
         self.set_text_to_element(OrderPageLocators.Station_field, station)
-        self.driver.find_element(*OrderPageLocators.Station_dropdown).click()
+        self.get_station()
 
     @allure.step("Заполняем поле с телефоном")
     def set_number_to_field(self, number):
@@ -43,6 +41,7 @@ class OrderPages(BasePage):
     def click_next_button(self):
         self.click_to_element(OrderPageLocators.Next_button)
 
+    @allure.step('Заполняем поля заказа')
     def create_order(self, client):
         self.set_name_to_field(client.get('name'))
         self.set_lastname_to_field(client.get('lastname'))
@@ -55,13 +54,14 @@ class OrderPages(BasePage):
         self.set_text_to_element(OrderPageLocators.Date_field, date)
         self.set_text_to_element(OrderPageLocators.Date_field, Keys.ENTER)
 
+    @allure.step('Выбираем дату заказа')
     def select_rental_period(self, period):
         self.click_to_element(OrderPageLocators.Rental_period)
         self.click_to_element(OrderPageLocators.One_day)
 
     @allure.step("Выбираем самокат чёрного цвета")
     def click_checkbox(self, color):
-        self.driver.find_element(*color).click()
+        self.get_color(color)
 
     @allure.step('Заполняем поле "Комментарий"')
     def set_comment(self, comment):
@@ -81,23 +81,6 @@ class OrderPages(BasePage):
         self.set_comment(rental_data.get('comment'))
         self.click_order_button()
 
-    def wait_for_confirm(self):
-        WebDriverWait(self.driver, 30).until(ec.visibility_of_element_located(OrderPageLocators.Confirm))
-
     @allure.step('Клик по кнопке "Да" в диалоге подтверждения')
     def click_confirmation_order(self):
         self.click_to_element(OrderPageLocators.Yes_button)
-
-    def wait_for_order_completed(self):
-        WebDriverWait(self.driver, 30).until(ec.visibility_of_element_located(OrderPageLocators.Order_completed))
-
-    @allure.step('Получить текст диалога успешного заказа')
-    def get_new_order_title(self):
-        new_order_text = self.driver.find_element(*OrderPageLocators.Order_completed).text
-        return new_order_text
-
-    def wait_for_new_tab(self, number):
-        WebDriverWait(self.driver, 30).until(ec.number_of_windows_to_be(number))
-
-    def wait_for_page_load(self, url):
-        WebDriverWait(self.driver, 30).until(ec.url_to_be(url))
