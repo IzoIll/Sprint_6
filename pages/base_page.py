@@ -1,7 +1,6 @@
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
-from locators.locators import MainPageLocators, OrderPageLocators
 
 class BasePage:
 
@@ -16,8 +15,8 @@ class BasePage:
     def set_text_to_element(self, locator, text):
         self.driver.find_element(*locator).send_keys(text)
 
-    def open_page(self, page):
-        self.driver.get(page)
+    def get_current_url(self):
+        return self.driver.current_url
 
     def get_questions(self, locator):
         return self.driver.find_elements(*locator)

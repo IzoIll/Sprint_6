@@ -1,7 +1,6 @@
 import  allure
 import pytest
-from Data.data import RentalData, TextData, OrdersData, UrlsData
-from pages.base_page import BasePage
+from Data.data import RentalData, TextData, OrdersData
 from pages.order_page import OrderPages
 from locators.locators import OrderPageLocators
 
@@ -10,10 +9,8 @@ class TestOrderButton:
     @allure.title('Заказ самокатов с двумя позитивными сценариями')
     @allure.description('Первый заказ самоката с вводом данных. Самокат заказан успешно, отображается номер заказа')
     def test_order_button_on_header(self, driver):
-        page = BasePage(driver)
-        page.open_page(UrlsData.Scooter_url)
         order_pages = OrderPages(driver)
-        order_pages.click_cookie_button()
+        order_pages.click_cookie_button_order()
         order_pages.click_order_button_in_header()
         order_pages.create_order(OrdersData.Order_1)
         order_pages.click_next_button()
@@ -26,10 +23,8 @@ class TestOrderButton:
 
     @allure.description('Второй заказ самоката с вводом данных. Самокат заказан успешно, отображается номер заказа')
     def test_order_button_on_footer(self, driver):
-        page = BasePage(driver)
-        page.open_page(UrlsData.Scooter_url)
         order_pages = OrderPages(driver)
-        order_pages.click_cookie_button()
+        order_pages.click_cookie_button_order()
         order_pages.click_order_button_in_header()
         order_pages.create_order(OrdersData.Order_2)
         order_pages.click_next_button()

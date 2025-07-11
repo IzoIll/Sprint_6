@@ -4,7 +4,7 @@ from pages.base_page import BasePage
 
 class MainPage(BasePage):
     @allure.step('Кликнуть на кнопку "да все привыкли"')
-    def click_cookie_button(self):
+    def click_cookie_button_main(self):
         self.click_to_element(*MainPageLocators.Cookie_button)
 
     @allure.step('Пролистать до раздела "Вопросы о важном"')
@@ -24,3 +24,4 @@ class MainPage(BasePage):
     @allure.step('Клик по логотипу "Яндекс"')
     def click_yandex_logo(self):
         self.click_to_element(MainPageLocators.Yandex_logo)
+

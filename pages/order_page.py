@@ -5,7 +5,7 @@ from pages.base_page import BasePage
 
 class OrderPages(BasePage):
     @allure.step('Кликнуть на кнопку "да все привыкли"')
-    def click_cookie_button(self):
+    def click_cookie_button_order(self):
         self.click_to_element(MainPageLocators.Cookie_button)
 
     @allure.step("Заполняем поле с именем")

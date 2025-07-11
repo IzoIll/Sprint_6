@@ -5,7 +5,6 @@ class MainPageLocators:
     Questions = By.XPATH, "//div[contains(@class, 'accordion__item')]"  # Вопросы
     Answer = By.XPATH, "//div[contains(@class, 'accordion__panel') and not(@hidden)]"  # Отображаемый ответ
     Cookie_button = By.XPATH, "//button[contains(@class, 'App_CookieButton_')]"  # Кнопка "Да все привыкли"
-    Header_text = By.XPATH, "//div[contains(@class, 'Home_Header')]"  # Заголовок на главной
     Scooter_logo = By.XPATH, "//*[@alt='Scooter']"  # Логотип "Самокат"
     Yandex_logo = By.XPATH, "//*[@alt='Yandex']"  # Логотип "Яндекс"
 
