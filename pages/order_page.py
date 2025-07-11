@@ -23,7 +23,7 @@ class OrderPages(BasePage):
     @allure.step("Заполняем поле с метро")
     def set_station(self, station):
         self.set_text_to_element(OrderPageLocators.Station_field, station)
-        self.get_station()
+        self.get_station(OrderPageLocators.Station_dropdown)
 
     @allure.step("Заполняем поле с телефоном")
     def set_number_to_field(self, number):
@@ -32,10 +32,6 @@ class OrderPages(BasePage):
     @allure.step('Клик по кнопке "Заказать" в шапке')
     def click_order_button_in_header(self):
         self.click_to_element(OrderPageLocators.Order_button_in_header)
-
-    @allure.step('Клик по кнопке "Заказать" на странице ')
-    def click_order_button_in_footer(self):
-        self.click_to_element(OrderPageLocators.Order_button_in_footer)
 
     @allure.step('Клик по кнопке "Далее"')
     def click_next_button(self):

@@ -8,10 +8,6 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-    def find_my_element(self, locator):
-        return WebDriverWait(self.driver, 5).until(
-            expected_conditions.visibility_of_element_located(*locator))
-
     def click_to_element(self, locator):
         WebDriverWait(self.driver, 5).until(
             expected_conditions.element_to_be_clickable(locator))
@@ -23,42 +19,39 @@ class BasePage:
     def open_page(self, page):
         self.driver.get(page)
 
-    def get_questions(self):
-        return self.driver.find_elements(*MainPageLocators.Questions)
+    def get_questions(self, locator):
+        return self.driver.find_elements(*locator)
 
-    def get_faq(self):
-        return self.driver.find_element(*MainPageLocators.FAQ)
+    def get_faq(self, locator):
+        return self.driver.find_element(*locator)
 
-    def wait_for_the_faq_page_load(self):
-        return WebDriverWait(self.driver, 30).until(ec.visibility_of_element_located(MainPageLocators.FAQ))
+    def wait_for_the_faq_page_load(self, locator):
+        return WebDriverWait(self.driver, 30).until(ec.visibility_of_element_located(locator))
 
-    def get_answer_text(self):
-        return self.driver.find_element(*MainPageLocators.Answer).text
+    def get_answer_text(self, locator):
+        return self.driver.find_element(*locator).text
 
-    def wait_for_get_answer(self):
-        WebDriverWait(self.driver, 25).until(ec.visibility_of_element_located(MainPageLocators.Answer))
+    def wait_for_get_answer(self, locator):
+        WebDriverWait(self.driver, 25).until(ec.visibility_of_element_located(locator))
 
-    def get_main_header_text(self):
-        return self.driver.find_element(*MainPageLocators.Header_text).text
+    def get_main_header_text(self, locator):
+        return self.driver.find_element(*locator).text
 
-    def wait_for_confirm(self):
-        WebDriverWait(self.driver, 30).until(ec.visibility_of_element_located(OrderPageLocators.Confirm))
+    def wait_for_confirm(self, locator):
+        WebDriverWait(self.driver, 30).until(ec.visibility_of_element_located(locator))
 
-    def get_station(self):
-        return self.driver.find_element(*OrderPageLocators.Station_dropdown).click()
+    def get_station(self, locator):
+        return self.driver.find_element(*locator).click()
 
     def get_color(self, color):
         return self.driver.find_element(*color).click()
 
-    def wait_for_order_completed(self):
-        WebDriverWait(self.driver, 30).until(ec.visibility_of_element_located(OrderPageLocators.Order_completed))
+    def wait_for_order_completed(self, locator):
+        WebDriverWait(self.driver, 30).until(ec.visibility_of_element_located(locator))
 
-    def get_new_order_title(self):
-        new_order_text = self.driver.find_element(*OrderPageLocators.Order_completed).text
+    def get_new_order_title(self, locator):
+        new_order_text = self.driver.find_element(*locator).text
         return new_order_text
 
-    def wait_for_new_tab(self, number):
-        WebDriverWait(self.driver, 30).until(ec.number_of_windows_to_be(number))
-
-    def wait_for_page_load(self, url):
-        WebDriverWait(self.driver, 30).until(ec.url_to_be(url))
+    def scroll_down(self, locator):
+        self.driver.execute_script("arguments[0].scrollIntoView();", self.get_faq(locator))

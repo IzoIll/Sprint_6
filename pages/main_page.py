@@ -9,12 +9,12 @@ class MainPage(BasePage):
 
     @allure.step('Пролистать до раздела "Вопросы о важном"')
     def scroll_to_questions(self):
-        self.driver.execute_script("arguments[0].scrollIntoView();", BasePage.get_faq(self))
-        BasePage.wait_for_the_faq_page_load(self)
+        self.scroll_down(MainPageLocators.FAQ)
+        self.wait_for_the_faq_page_load(MainPageLocators.FAQ)
 
     @allure.step('Нажать на вопрос')
     def click_on_question(self, index):
-        questions = self.get_questions()
+        questions = self.get_questions(MainPageLocators.Questions)
         questions[index - 1].click()
 
     @allure.step('Клик по логотипу "Самокат"')

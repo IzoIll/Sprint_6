@@ -3,6 +3,7 @@ import pytest
 from pages.base_page import BasePage
 from pages.main_page import MainPage
 from Data.data import UrlsData, TextData
+from locators.locators import MainPageLocators
 
 @pytest.mark.usefixtures("driver")
 class TestLogo:
@@ -13,7 +14,7 @@ class TestLogo:
         main_page = MainPage(driver)
         base_page.open_page(UrlsData.Order_scooter_url)
         main_page.click_scooter_logo()
-        current_header_text = BasePage(driver).get_main_header_text()
+        current_header_text = BasePage(driver).get_main_header_text(MainPageLocators.Header_text)
         assert driver.current_url == UrlsData.Scooter_url and TextData.Header_text == current_header_text
 
     @allure.title('Открытие сайта Дзен по логотипу "Яндекс"')
